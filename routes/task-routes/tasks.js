@@ -28,9 +28,19 @@ router.post('/create', (req, res) => {
 router.put('/update', (req, res) => {
   Task.findByIdAndUpdate(req.body.taskId, req.body, { new: true })
     .then(updatedTask => {
+      console.log({updatedTask})
       res.status(200).json(updatedTask);
     })
     .catch(err => res.status(400).json({message: "Error while updating task"}))
+});
+
+router.delete('/delete', (req, res) => {
+  Task.findByIdAndDelete(req.body.taskId)
+    .then(() => {
+      res.status(200).json({message: "Delete successfully"})
+    })
+    .catch(err => res.status(400).json({message: "Error while trying to delete task"}))
 })
+
 
 module.exports = router;
