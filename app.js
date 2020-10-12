@@ -15,7 +15,12 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/tasks-api', {useNewUrlParser: true})
+  .connect('mongodb://localhost/tasks-api', {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -77,6 +82,7 @@ require('./passport')(app);
 
 app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
+app.use('/task', require('./routes/task-routes/tasks'));
       
 
 module.exports = app;
