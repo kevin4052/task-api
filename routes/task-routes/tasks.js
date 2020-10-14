@@ -12,7 +12,7 @@ router.post('/create', (req, res) => {
       res.status(200).json(createdTask);
     })
     .catch(err => {
-      res.status(400).json({message: 'Error while creating task'});
+      res.status(400).json({ message: 'Error while creating task' });
     });
 });
 
@@ -41,7 +41,7 @@ router.put('/update', (req, res) => {
       res.status(200).json(updatedTask);
     })
     .catch(err => {
-      res.status(400).json({message: "Error while updating task"});
+      res.status(400).json({ message: "Error while updating task" });
     });
 
 });
@@ -51,10 +51,10 @@ router.delete('/delete', (req, res) => {
 
   Task.findByIdAndDelete(req.body.taskId)
     .then(() => {
-      res.status(200).json({message: "Delete successfully"});
+      res.status(200).json({ message: "Delete successfully" });
     })
     .catch(err => {
-      res.status(400).json({message: "Error while trying to delete task"});
+      res.status(400).json({ message: "Error while trying to delete task" });
     });
 
 })
