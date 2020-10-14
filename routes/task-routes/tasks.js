@@ -16,7 +16,7 @@ router.post('/create', (req, res) => {
     });
 });
 
-// READ tasks
+// READ all tasks
 router.get('/all-tasks', (req, res, next) => {
 
   Task.find()
@@ -25,7 +25,21 @@ router.get('/all-tasks', (req, res, next) => {
       res.status(200).json(tasksFromDB);
     })
     .catch(err => {
-      res.status(500).json({ message: "Error finding all tasks"});
+      res.status(400).json({ message: "Error finding all tasks"});
+    });
+
+});
+
+// READ one task
+router.get('/task-details/:taskId', (req, res) => {
+
+  Task.findById(req.params.taskId)
+    .then(taskFromDB => {
+      console.log({taskFromDB});
+      res.status(200).json(taskFromDB);
+    })
+    .catch(err => {
+      res.status(400).json({ message: "Error while finding task Id"});
     });
 
 });
