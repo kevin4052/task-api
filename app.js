@@ -12,6 +12,7 @@ const path         = require('path');
 const session    = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash      = require("connect-flash");
+const cors = require('cors');
     
 
 mongoose
@@ -32,6 +33,13 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
+app.use(
+  cors({
+    credentials: true,
+    origin: ['http://localhost:3000'] // <== this will be the URL of our React app (it will be running on port 3000)
+  })
+);
 
 // Middleware Setup
 app.use(logger('dev'));
@@ -81,8 +89,8 @@ require('./passport')(app);
     
 
 app.use('/', require('./routes/index'));
-app.use('/auth', require('./routes/auth'));
-app.use('/task', require('./routes/task-routes/tasks'));
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/task', require('./routes/task-routes/tasks'));
       
 
 module.exports = app;

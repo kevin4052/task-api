@@ -31,7 +31,7 @@ router.get('/all-tasks', (req, res, next) => {
 });
 
 // READ one task
-router.get('/task-details/:taskId', (req, res) => {
+router.get('/details/:taskId', (req, res) => {
 
   Task.findById(req.params.taskId)
     .then(taskFromDB => {
