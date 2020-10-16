@@ -61,9 +61,9 @@ router.put('/update', (req, res) => {
 });
 
 // DELETE task
-router.delete('/delete', (req, res) => {
+router.delete('/delete/:taskId', (req, res) => {
 
-  Task.findByIdAndDelete(req.body.taskId)
+  Task.findByIdAndDelete(req.params.taskId)
     .then(() => {
       res.status(200).json({ message: "Delete successfully" });
     })
